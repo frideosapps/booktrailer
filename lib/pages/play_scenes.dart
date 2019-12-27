@@ -5,7 +5,7 @@ import 'package:frideos/frideos.dart';
 import 'package:booktrailer/models/models.dart';
 import 'package:booktrailer/pages/scene_book.dart';
 import 'package:booktrailer/pages/scene_last.dart';
-import 'package:booktrailer/widgets/scene_widget.dart';
+import 'package:booktrailer/widgets/build_scene.dart';
 
 class PlayScenes extends StatelessWidget {
   const PlayScenes({

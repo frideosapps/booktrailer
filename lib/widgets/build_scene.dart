@@ -96,8 +96,8 @@ class _BuildSceneState extends State<BuildScene>
     }
   }
 
-  double _calcOpacity(bool isisOverlay, double animValue) {
-    if (!isisOverlay && animValue < 0.5) return 1.0;
+  double _calcOpacity(bool isOverlay, double animValue) {
+    if (!isOverlay && animValue < 0.5) return 1.0;
 
     if (animValue > 0.0 && animValue < 0.6) return 1.0 - animValue;
 
