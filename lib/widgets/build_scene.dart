@@ -63,13 +63,15 @@ class _BuildSceneState extends State<BuildScene>
       curve: Curves.easeIn,
     );
 
-    particlesAnim.forward();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       particlesSystem.init(
-          totalParticles: 350,
-          width: context.size.width,
-          height: context.size.height);
+        totalParticles: 350,
+        width: context.size.width,
+        height: context.size.height,
+      );
+
+      particlesAnim.forward();
+
       isParticleSystemInitialized = true;
     });
   }

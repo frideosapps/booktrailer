@@ -23,9 +23,9 @@ enum AnimationType {
   transition,
 }
 
-enum TextAnimationType { scale, mov, split }
+enum TextAnimationType { scale, split }
 
-enum TransitionType { horizontal, vertical, circular, linear, spiral }
+enum TransitionType { horizontal, vertical, circular }
 
 enum TrailerScene { first, second, third, fourth, fifth, sixth }
 

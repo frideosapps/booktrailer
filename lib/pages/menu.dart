@@ -44,7 +44,9 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
         width: context.size.width,
         height: context.size.height,
       );
+
       isParticleSystemInitialized = true;
+
       particlesAnim.forward();
     });
   }
