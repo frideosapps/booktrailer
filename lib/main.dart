@@ -58,10 +58,7 @@ class _SetupAssetsState extends State<SetupAssets> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    final completer = Completer<bool>();
-    completer.complete(precachingImages(context));
-    precache = completer.future;
+    precache = precachingImages(context);
   }
 
   Future<bool> precachingImages(BuildContext context) async {
