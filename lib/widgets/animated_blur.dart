@@ -19,42 +19,33 @@ class AnimatedBlurWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        child,
-        AnimationWidget<double>(
-          begin: strength,
-          end: -strength,
-          curve: curve,
-          duration: duration,
-          repeat: true,
-          builder: (context, animMov) {
-            return Transform.translate(
+    return AnimationWidget<double>(
+      begin: strength,
+      end: -strength,
+      curve: curve,
+      duration: duration,
+      repeat: true,
+      builder: (context, animMov) {
+        return Stack(
+          children: [
+            child,
+            Transform.translate(
               offset: Offset(animMov.value, 0.0),
               child: Opacity(
                 opacity: 0.5,
                 child: child,
               ),
-            );
-          },
-        ),
-        AnimationWidget<double>(
-          begin: -strength,
-          end: strength,
-          curve: curve,
-          duration: duration,
-          repeat: true,
-          builder: (context, animMov) {
-            return Transform.translate(
-              offset: Offset(animMov.value, 0.0),
+            ),
+            Transform.translate(
+              offset: Offset(-animMov.value, 0.0),
               child: Opacity(
                 opacity: 0.3,
                 child: child,
               ),
-            );
-          },
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 }
