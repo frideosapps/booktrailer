@@ -10,8 +10,8 @@ import 'package:booktrailer/widgets/smoke_background.dart';
 import 'package:booktrailer/particles/particles_widget.dart';
 import 'package:booktrailer/widgets/transitions.dart';
 
-class SceneWidget extends StatefulWidget {
-  const SceneWidget({
+class BuildScene extends StatefulWidget {
+  const BuildScene({
     Key key,
     @required this.texts,
     @required this.image,
@@ -35,10 +35,10 @@ class SceneWidget extends StatefulWidget {
   final bool blur;
 
   @override
-  _SceneWidgetState createState() => _SceneWidgetState();
+  _BuildSceneState createState() => _BuildSceneState();
 }
 
-class _SceneWidgetState extends State<SceneWidget>
+class _BuildSceneState extends State<BuildScene>
     with SingleTickerProviderStateMixin {
   double width, height;
 

@@ -22,7 +22,7 @@ class PlayScenes extends StatelessWidget {
       child: ScenesWidget(
         scenes: [
           Scene(
-            widget: SceneWidget(
+            widget: BuildScene(
               key: Key('1'),
               texts: textsScenes[TrailerScene.first][language],
               image: imageFilenames[AssetsImages.city],
@@ -33,7 +33,7 @@ class PlayScenes extends StatelessWidget {
             time: 11500,
           ),
           Scene(
-            widget: SceneWidget(
+            widget: BuildScene(
               key: Key('2'),
               texts: textsScenes[TrailerScene.second][language],
               image: imageFilenames[AssetsImages.man],
@@ -46,7 +46,7 @@ class PlayScenes extends StatelessWidget {
             time: 11500,
           ),
           Scene(
-            widget: SceneWidget(
+            widget: BuildScene(
               key: Key('3'),
               texts: textsScenes[TrailerScene.third][language],
               image: imageFilenames[AssetsImages.alone],
@@ -59,7 +59,7 @@ class PlayScenes extends StatelessWidget {
             time: 11500,
           ),
           Scene(
-            widget: SceneWidget(
+            widget: BuildScene(
               key: Key('4'),
               texts: textsScenes[TrailerScene.fourth][language],
               image: imageFilenames[AssetsImages.tunnel],
@@ -71,7 +71,7 @@ class PlayScenes extends StatelessWidget {
             time: 10000,
           ),
           Scene(
-            widget: SceneWidget(
+            widget: BuildScene(
               key: Key('5'),
               texts: textsScenes[TrailerScene.fifth][language],
               image: imageFilenames[AssetsImages.eyes],
