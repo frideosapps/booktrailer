@@ -21,35 +21,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LayoutBuilder(
-        builder: (context, constraints) {
-          return MyHomePage(
-            maxWidth: constraints.maxWidth,
-            maxHeight: constraints.maxHeight,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, this.maxWidth, this.maxHeight}) : super(key: key);
-
-  final double maxWidth, maxHeight;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.black,
-        alignment: Alignment.center,
-        child: SetupAssets(),
+      home: Scaffold(
+        body: Container(
+          color: Colors.black,
+          alignment: Alignment.center,
+          child: SetupAssets(),
+        ),
       ),
     );
   }
@@ -103,7 +80,9 @@ class _SetupAssetsState extends State<SetupAssets> {
       future: precache,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return LoadingWidget(progress: loadingProgress / (images.length - 1));
+          return LoadingWidget(
+            progress: loadingProgress / (images.length - 1),
+          );
         } else {
           return ValueBuilder<bool>(
             streamed: appState.isPlaying,
