@@ -67,7 +67,7 @@ class _LastSceneState extends State<LastScene> with TickerProviderStateMixin {
             return Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                if (!appState.isParticleSystemInitialized)
+                if (!appState.isParticlesSystemInitialized)
                   Container()
                 else
                   Opacity(

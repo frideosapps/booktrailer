@@ -30,7 +30,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
       );
 
       setState(() {
-        appState.isParticleSystemInitialized = true;
+        appState.isParticlesSystemInitialized = true;
       });
     });
   }
@@ -49,7 +49,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
       child: Container(
         child: Stack(
           children: [
-            if (appState.isParticleSystemInitialized)
+            if (appState.isParticlesSystemInitialized)
               Opacity(
                 opacity: 0.8,
                 child: ParticlesSystemPlayer(

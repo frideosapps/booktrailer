@@ -131,7 +131,7 @@ class _BuildSceneState extends State<BuildScene>
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              if (!appState.isParticleSystemInitialized ||
+              if (!appState.isParticlesSystemInitialized ||
                   widget.image == imageFilenames[AssetsImages.tunnel])
                 Container()
               else

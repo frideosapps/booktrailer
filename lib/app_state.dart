@@ -22,7 +22,7 @@ class AppState extends AppStateModel {
 
 
   final particlesSystem = ParticlesSystem();
-  bool isParticleSystemInitialized = false;
+  bool isParticlesSystemInitialized = false;
 
 
   void goToMenu() {
