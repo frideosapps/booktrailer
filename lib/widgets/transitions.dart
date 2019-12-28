@@ -88,39 +88,35 @@ class TransitionVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              color: Colors.black,
-              height: height,
-              width: width,
-              child: Image.asset(
-                image,
-                fit: fit,
-              ),
+        Container(
+          color: Colors.black,
+          height: height,
+          width: width,
+          child: Image.asset(
+            image,
+            fit: fit,
+          ),
+        ),
+        Container(
+          width: (width / 100) * transition,
+          height: height,
+          child: Image.asset(
+            imageFilenames[AssetsImages.black],
+            fit: BoxFit.fill,
+          ),
+        ),
+        Opacity(
+          opacity: 1.0 - transition / 100,
+          child: Container(
+            height: height,
+            width: width,
+            child: Image.asset(
+              image,
+              fit: fit,
             ),
-            Container(
-              width: (width / 100) * transition,
-              height: height,
-              child: Image.asset(
-                imageFilenames[AssetsImages.black],
-                fit: BoxFit.fill,
-              ),
-            ),
-            Opacity(
-              opacity: 1.0 - transition / 100,
-              child: Container(
-                height: height,
-                width: width,
-                child: Image.asset(
-                  image,
-                  fit: fit,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -146,42 +142,38 @@ class TransitionHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              color: Colors.black,
-              height: height,
-              width: width,
-              child: Image.asset(
-                image,
-                fit: fit,
-              ),
+        Container(
+          color: Colors.black,
+          height: height,
+          width: width,
+          child: Image.asset(
+            image,
+            fit: fit,
+          ),
+        ),
+        Opacity(
+          opacity: transition / 100,
+          child: Container(
+            width: width,
+            height: (height / 100) * transition,
+            child: Image.asset(
+              imageFilenames[AssetsImages.black],
+              fit: BoxFit.fill,
             ),
-            Opacity(
-              opacity: transition / 100,
-              child: Container(
-                width: width,
-                height: (height / 100) * transition,
-                child: Image.asset(
-                  imageFilenames[AssetsImages.black],
-                  fit: BoxFit.fill,
-                ),
-              ),
+          ),
+        ),
+        Opacity(
+          opacity: 1.0 - transition / 100,
+          child: Container(
+            height: height,
+            width: width,
+            child: Image.asset(
+              image,
+              fit: fit,
             ),
-            Opacity(
-              opacity: 1.0 - transition / 100,
-              child: Container(
-                height: height,
-                width: width,
-                child: Image.asset(
-                  image,
-                  fit: fit,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -207,48 +199,44 @@ class TransitionCircular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              color: Colors.black,
-              height: height,
-              width: width,
-              child: Image.asset(
-                image,
-                fit: fit,
-              ),
-            ),
-            Opacity(
-              opacity: (transition / 100),
-              child: Transform.scale(
-                scale: transition / 50,
-                child: Transform.rotate(
-                  angle: (math.pi / 100) * transition,
-                  child: Container(
-                    width: (width / 100) * transition,
-                    height: (height / 100) * transition,
-                    child: Image.asset(
-                      imageFilenames[AssetsImages.black],
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Opacity(
-              opacity: (1.0 - transition / 100),
+        Container(
+          color: Colors.black,
+          height: height,
+          width: width,
+          child: Image.asset(
+            image,
+            fit: fit,
+          ),
+        ),
+        Opacity(
+          opacity: (transition / 100),
+          child: Transform.scale(
+            scale: transition / 50,
+            child: Transform.rotate(
+              angle: (math.pi / 100) * transition,
               child: Container(
-                height: height,
-                width: width,
+                width: (width / 100) * transition,
+                height: (height / 100) * transition,
                 child: Image.asset(
-                  image,
-                  fit: fit,
+                  imageFilenames[AssetsImages.black],
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-          ],
+          ),
+        ),
+        Opacity(
+          opacity: (1.0 - transition / 100),
+          child: Container(
+            height: height,
+            width: width,
+            child: Image.asset(
+              image,
+              fit: fit,
+            ),
+          ),
         ),
       ],
     );
