@@ -69,8 +69,8 @@ class Transition extends StatelessWidget {
   }
 }
 
-class TransitionHorizontal extends StatelessWidget {
-  const TransitionHorizontal({
+class TransitionVertical extends StatelessWidget {
+  const TransitionVertical({
     Key key,
     @required this.width,
     @required this.height,
@@ -127,8 +127,8 @@ class TransitionHorizontal extends StatelessWidget {
   }
 }
 
-class TransitionVertical extends StatelessWidget {
-  const TransitionVertical({
+class TransitionHorizontal extends StatelessWidget {
+  const TransitionHorizontal({
     Key key,
     @required this.width,
     @required this.height,

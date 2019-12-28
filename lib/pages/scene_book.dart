@@ -16,7 +16,8 @@ class BookScene extends StatefulWidget {
   _BookSceneState createState() => _BookSceneState();
 }
 
-class _BookSceneState extends State<BookScene> {
+class _BookSceneState extends State<BookScene>
+    with SingleTickerProviderStateMixin {
   double width, height;
 
   @override
@@ -30,11 +31,11 @@ class _BookSceneState extends State<BookScene> {
   Widget build(BuildContext context) {
     return FadeInWidget(
       duration: 2200,
-      child: CompositeAnimationWidget(
+      child: CompositeCreate(
         duration: 19250,
         repeat: false,
         compositeMap: {
-          AnimationType.fadeIn: CompositeTween<double>(
+          AnimationType.fadeIn: CompositeItem<double>(
             begin: 0.0,
             end: 1.0,
             curve: const Interval(
@@ -43,7 +44,7 @@ class _BookSceneState extends State<BookScene> {
               curve: Curves.linear,
             ),
           ),
-          AnimationType.scale: CompositeTween<double>(
+          AnimationType.scale: CompositeItem<double>(
             begin: 2.8,
             end: 3.2,
             curve: const Interval(
@@ -52,7 +53,7 @@ class _BookSceneState extends State<BookScene> {
               curve: Curves.linear,
             ),
           ),
-          AnimationType.fadeOut: CompositeTween<double>(
+          AnimationType.fadeOut: CompositeItem<double>(
             begin: 1.0,
             end: 0.0,
             curve: const Interval(
@@ -69,9 +70,8 @@ class _BookSceneState extends State<BookScene> {
               children: [
                 Opacity(
                   opacity: 0.8,
-                  child: ParticlesWidget(
-                    maxWidth: width,
-                    maxHeight: height,
+                  child: ParticlesSystemPlayer(
+                    particlesSystem: appState.particlesSystem,
                   ),
                 ),
                 Opacity(

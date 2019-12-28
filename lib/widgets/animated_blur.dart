@@ -19,7 +19,7 @@ class AnimatedBlurWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimationWidget<double>(
+    return AnimationCreate<double>(
       begin: strength,
       end: -strength,
       curve: curve,

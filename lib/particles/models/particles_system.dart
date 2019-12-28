@@ -22,18 +22,19 @@ class ParticlesSystem {
       final x = rnd.nextDouble() * width;
       final y = rnd.nextDouble() * height;
       final velocity = rnd.nextDouble() * 1.5;
-      final size = 0.5 + rnd.nextDouble() * 0.5;
+      final size = 0.25 + rnd.nextDouble();
       final direction = rnd.nextDouble() > 0.5 ? 1 : -1;
       final alpha = rnd.nextInt(155);
 
       particles.add(
         Particle(
-            x: x,
-            y: y,
-            velocity: velocity,
-            size: size,
-            direction: direction,
-            alpha: alpha),
+          x: x,
+          y: y,
+          velocity: velocity,
+          size: size,
+          direction: direction,
+          alpha: alpha,
+        ),
       );
     }
   }

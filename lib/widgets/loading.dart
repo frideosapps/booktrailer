@@ -15,13 +15,14 @@ class LoadingWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 60.0),
       alignment: Alignment.center,
-      child: AnimationWidget<double>(
+      child: AnimationCreate<double>(
         begin: 0.1,
-        end: 0.6,
+        end: 1.0,
         curve: Curves.easeIn,
-        duration: 2550,
+        duration: 1000,
         repeat: true,
-        builder: (context, anim) {
+        reverse: true,
+        builder: (context, anim) {          
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

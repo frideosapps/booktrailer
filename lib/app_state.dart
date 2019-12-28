@@ -3,6 +3,7 @@ import 'package:frideos/frideos.dart';
 import 'package:frideos_core/frideos_core.dart';
 
 import 'package:booktrailer/models/models.dart';
+import 'package:booktrailer/particles/models/particles_system.dart';
 
 class AppState extends AppStateModel {
   factory AppState() => _singletonAppState;
@@ -18,6 +19,11 @@ class AppState extends AppStateModel {
   String playScenesKey = DateTime.now().toString();
 
   Language lang = Language.english;
+
+
+  final particlesSystem = ParticlesSystem();
+  bool isParticleSystemInitialized = false;
+
 
   void goToMenu() {
     isPlaying.value = false;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:frideos/frideos.dart';
 
-import 'package:booktrailer/particles/models/particles_system.dart';
+import 'package:booktrailer/app_state.dart';
 import 'package:booktrailer/models/models.dart';
 import 'package:booktrailer/widgets/animated_text.dart';
 import 'package:booktrailer/widgets/smoke_background.dart';
@@ -42,10 +42,7 @@ class _BuildSceneState extends State<BuildScene>
     with SingleTickerProviderStateMixin {
   double width, height;
 
-  CurvedTween<double> particlesAnim;
-
-  final particlesSystem = ParticlesSystem();
-  bool isParticleSystemInitialized = false;
+  AnimationCurved<double> particlesAnim;
 
   bool isOverlay = false;
 
@@ -53,7 +50,7 @@ class _BuildSceneState extends State<BuildScene>
   void initState() {
     super.initState();
 
-    particlesAnim = CurvedTween<double>(
+    particlesAnim = AnimationCurved<double>(
       duration: Duration(milliseconds: 3500),
       setState: setState,
       tickerProvider: this,
@@ -62,18 +59,6 @@ class _BuildSceneState extends State<BuildScene>
       onAnimating: _onAnimating,
       curve: Curves.easeIn,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      particlesSystem.init(
-        totalParticles: 350,
-        width: context.size.width,
-        height: context.size.height,
-      );
-
-      particlesAnim.forward();
-
-      isParticleSystemInitialized = true;
-    });
   }
 
   @override
@@ -108,10 +93,10 @@ class _BuildSceneState extends State<BuildScene>
 
   @override
   Widget build(BuildContext context) {
-    return CompositeAnimationWidget(
+    return CompositeCreate(
       duration: widget.duration,
       compositeMap: {
-        AnimationType.fadeIn: CompositeTween<double>(
+        AnimationType.fadeIn: CompositeItem<double>(
           begin: 0.2,
           end: 1.0,
           curve: const Interval(
@@ -120,7 +105,7 @@ class _BuildSceneState extends State<BuildScene>
             curve: Curves.easeIn,
           ),
         ),
-        AnimationType.transition: CompositeTween<double>(
+        AnimationType.transition: CompositeItem<double>(
           begin: 0.0,
           end: 100.0,
           curve: const Interval(
@@ -129,7 +114,7 @@ class _BuildSceneState extends State<BuildScene>
             curve: Curves.easeIn,
           ),
         ),
-        AnimationType.fadeOut: CompositeTween<double>(
+        AnimationType.fadeOut: CompositeItem<double>(
           begin: 1.0,
           end: 0.1,
           curve: const Interval(
@@ -143,97 +128,82 @@ class _BuildSceneState extends State<BuildScene>
       builder: (context, comp) {
         return FadeInWidget(
           duration: 1750,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Container(
-                height: height,
-                width: width / 2,
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    if (!isParticleSystemInitialized ||
-                        widget.image == imageFilenames[AssetsImages.tunnel])
-                      Container()
-                    else
-                      Opacity(
-                        opacity: _calcOpacity(
-                          isOverlay,
-                          comp.value(AnimationType.fadeIn),
-                        ),
-                        child: ParticlesSystemPlayer(
-                          animation: particlesAnim,
-                          particlesSystem: particlesSystem,
-                          maxWidth: width,
-                          maxHeight: height,
-                        ),
-                      ),
-                    if (widget.image == imageFilenames[AssetsImages.tunnel])
-                      Container()
-                    else
-                      Opacity(
-                        opacity:
-                            comp.value(AnimationType.fadeOut) < 1.0 ? 0.0 : 0.1,
-                        child: Container(
-                          width: width,
-                          height: height,
-                          child: Image.asset(
-                            imageFilenames[AssetsImages.rain],
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    if (widget.image == imageFilenames[AssetsImages.tunnel])
-                      Container()
-                    else
-                      Opacity(
-                        opacity:
-                            comp.value(AnimationType.fadeOut) < 1.0 ? 0.0 : 0.5,
-                        child: SmokeBackground(),
-                      ),
-                    Opacity(
-                      opacity: isOverlay ? 0.5 : 0.0,
-                      child: Container(
-                        width: width,
-                        height: height,
-                        child: Image.asset(
-                          widget.image,
-                          fit: widget.boxFit,
-                        ),
-                      ),
+              if (!appState.isParticleSystemInitialized ||
+                  widget.image == imageFilenames[AssetsImages.tunnel])
+                Container()
+              else
+                Opacity(
+                  opacity: _calcOpacity(
+                    isOverlay,
+                    comp.value(AnimationType.fadeIn),
+                  ),
+                  child: ParticlesSystemPlayer(
+                    particlesSystem: appState.particlesSystem,
+                  ),
+                ),
+              if (widget.image == imageFilenames[AssetsImages.tunnel])
+                Container()
+              else
+                Opacity(
+                  opacity: comp.progress < 90 ? 0.1 : 0.0,
+                  child: Container(
+                    width: width,
+                    height: height,
+                    child: Image.asset(
+                      imageFilenames[AssetsImages.rain],
+                      fit: BoxFit.cover,
                     ),
-                    AnimatedText(
-                      textAnimationType: widget.textAnimationType,
-                      width: width,
-                      texts: !isOverlay ? widget.texts : [''],
-                      reverse: widget.textAnimationReverse,
-                      onAnimating: (progress) {
-                        if (widget.blink) {
-                          if (progress >= 30 && progress <= 34 ||
-                              progress >= 46 && progress <= 50) {
-                            isOverlay = true;
-                          } else {
-                            isOverlay = false;
-                          }
-                        }
-                      },
-                    ),
-                    Opacity(
-                      opacity: comp.value(AnimationType.fadeOut),
-                      child: Opacity(
-                        opacity: comp.value(AnimationType.fadeIn),
-                        child: Transition(
-                          transitionType: widget.transitionType,
-                          height: height,
-                          width: width,
-                          transition: comp.value(AnimationType.transition),
-                          image: widget.image,
-                          fit: widget.boxFit,
-                          blur: widget.blur,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
+                ),
+              if (widget.image == imageFilenames[AssetsImages.tunnel])
+                Container()
+              else
+                Opacity(
+                  opacity: comp.progress < 90 ? 0.5 : 0.0,
+                  child: SmokeBackground(),
+                ),
+              Opacity(
+                opacity: isOverlay ? 0.5 : 0.0,
+                child: Container(
+                  width: width,
+                  height: height,
+                  child: Image.asset(
+                    widget.image,
+                    fit: widget.boxFit,
+                  ),
+                ),
+              ),
+              AnimatedText(
+                textAnimationType: widget.textAnimationType,
+                width: width,
+                texts: !isOverlay ? widget.texts : [''],
+                reverse: widget.textAnimationReverse,
+                onAnimating: (progress) {
+                  if (widget.blink) {
+                    if (progress >= 30 && progress <= 34 ||
+                        progress >= 46 && progress <= 50) {
+                      isOverlay = true;
+                    } else {
+                      isOverlay = false;
+                    }
+                  }
+                },
+              ),
+              Opacity(
+                opacity: comp.progress <= 80
+                    ? comp.value(AnimationType.fadeIn)
+                    : comp.value(AnimationType.fadeOut),
+                child: Transition(
+                  transitionType: widget.transitionType,
+                  height: height,
+                  width: width,
+                  transition: comp.value(AnimationType.transition),
+                  image: widget.image,
+                  fit: widget.boxFit,
+                  blur: widget.blur,
                 ),
               ),
             ],

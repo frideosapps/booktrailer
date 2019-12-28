@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:frideos/frideos.dart';
 
 import 'package:booktrailer/app_state.dart';
-import 'package:booktrailer/particles/models/particles_system.dart';
 import 'package:booktrailer/particles/particles_widget.dart';
 import 'package:booktrailer/models/models.dart';
 
@@ -19,51 +18,21 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> with TickerProviderStateMixin {
   double width, height;
 
-  CurvedTween<double> particlesAnim;
-
-  final particlesSystem = ParticlesSystem();
-  bool isParticleSystemInitialized = false;
-
   @override
   void initState() {
     super.initState();
 
-    particlesAnim = CurvedTween<double>(
-      duration: Duration(milliseconds: 3500),
-      setState: setState,
-      tickerProvider: this,
-      begin: -1.0,
-      end: 1.0,
-      onAnimating: _onAnimating,
-      curve: Curves.easeIn,
-    );
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      particlesSystem.init(
-        totalParticles: 350,
+      appState.particlesSystem.init(
+        totalParticles: 150,
         width: context.size.width,
         height: context.size.height,
       );
 
-      isParticleSystemInitialized = true;
-
-      particlesAnim.forward();
+      setState(() {
+        appState.isParticleSystemInitialized = true;
+      });
     });
-  }
-
-  void _onAnimating(AnimationStatus status) {
-    if (status == AnimationStatus.completed) {
-      particlesAnim.reverse();
-    }
-    if (status == AnimationStatus.dismissed) {
-      particlesAnim.forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    particlesAnim.dispose();
-    super.dispose();
   }
 
   @override
@@ -80,14 +49,11 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
       child: Container(
         child: Stack(
           children: [
-            if (isParticleSystemInitialized)
+            if (appState.isParticleSystemInitialized)
               Opacity(
-                opacity: 0.6,
+                opacity: 0.8,
                 child: ParticlesSystemPlayer(
-                  animation: particlesAnim,
-                  particlesSystem: particlesSystem,
-                  maxWidth: width,
-                  maxHeight: height,
+                  particlesSystem: appState.particlesSystem,
                 ),
               )
             else
@@ -96,17 +62,14 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Spacer(),
-                Transform.translate(
-                  offset: Offset(0.0, 0.0),
-                  child: Container(
-                    height: height / 1.4,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      image: DecorationImage(
-                        fit: BoxFit.fitHeight,
-                        image: AssetImage(
-                          imageFilenames[AssetsImages.cover],
-                        ),
+                Container(
+                  height: height / 1.4,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    image: DecorationImage(
+                      fit: BoxFit.fitHeight,
+                      image: AssetImage(
+                        imageFilenames[AssetsImages.cover],
                       ),
                     ),
                   ),

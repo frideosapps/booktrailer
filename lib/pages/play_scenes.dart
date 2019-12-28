@@ -19,7 +19,7 @@ class PlayScenes extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeInWidget(
       duration: 2500,
-      child: ScenesWidget(
+      child: ScenesCreate(
         scenes: [
           Scene(
             widget: BuildScene(
@@ -51,7 +51,7 @@ class PlayScenes extends StatelessWidget {
               texts: textsScenes[TrailerScene.third][language],
               image: imageFilenames[AssetsImages.alone],
               boxFit: BoxFit.fitHeight,
-              transitionType: TransitionType.vertical,
+              transitionType: TransitionType.horizontal,
               textAnimationType: TextAnimationType.scale,
               textAnimationReverse: true,
               duration: 11500,
@@ -63,7 +63,7 @@ class PlayScenes extends StatelessWidget {
               key: Key('4'),
               texts: textsScenes[TrailerScene.fourth][language],
               image: imageFilenames[AssetsImages.tunnel],
-              transitionType: TransitionType.circular,
+              transitionType: TransitionType.horizontal,
               textAnimationType: TextAnimationType.split,
               duration: 10000,
               blur: true,

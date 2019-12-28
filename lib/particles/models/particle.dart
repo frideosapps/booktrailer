@@ -32,8 +32,8 @@ class Particle {
     x += direction * velocity + value;
     y += velocity;
 
-    if (y > height) {
-      y = -10.0;
+    if (y > height || x < 0.0 || x > width) {
+      y = 0.0;
       x = rnd.nextInt(height.toInt()).toDouble();
       size = 0.5 + rnd.nextDouble() * 0.5;
     }

@@ -35,11 +35,11 @@ class AnimatedTextScale extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CompositeAnimationWidget(
+    return CompositeCreate(
       duration: duration,
       repeat: false,
       compositeMap: {
-        AnimationType.fadeIn: CompositeTween<double>(
+        AnimationType.fadeIn: CompositeItem<double>(
           begin: 0.2,
           end: 1.0,
           curve: const Interval(
@@ -48,7 +48,7 @@ class AnimatedTextScale extends StatelessWidget {
             curve: Curves.linear,
           ),
         ),
-        AnimationType.scale: CompositeTween<double>(
+        AnimationType.scale: CompositeItem<double>(
           begin: reverse ? 0.8 : 1.0,
           end: reverse ? 1.0 : 0.8,
           curve: const Interval(
@@ -57,7 +57,7 @@ class AnimatedTextScale extends StatelessWidget {
             curve: Curves.linear,
           ),
         ),
-        AnimationType.fadeOut: CompositeTween<double>(
+        AnimationType.fadeOut: CompositeItem<double>(
           begin: 1.0,
           end: 0.0,
           curve: Interval(
@@ -191,11 +191,11 @@ class _AnimatedTextSplitState extends State<AnimatedTextSplit> {
 
   @override
   Widget build(BuildContext context) {
-    return CompositeAnimationWidget(
+    return CompositeCreate(
       duration: widget.duration,
       repeat: false,
       compositeMap: {
-        AnimationType.fadeIn: CompositeTween<double>(
+        AnimationType.fadeIn: CompositeItem<double>(
           begin: 0.0,
           end: 1.0,
           curve: const Interval(
@@ -204,7 +204,7 @@ class _AnimatedTextSplitState extends State<AnimatedTextSplit> {
             curve: Curves.linear,
           ),
         ),
-        AnimationType.mov: CompositeTween<double>(
+        AnimationType.mov: CompositeItem<double>(
           begin: 0.5,
           end: 0.0,
           curve: const Interval(
@@ -213,7 +213,7 @@ class _AnimatedTextSplitState extends State<AnimatedTextSplit> {
             curve: Curves.linearToEaseOut,
           ),
         ),
-        AnimationType.grow: CompositeTween<double>(
+        AnimationType.grow: CompositeItem<double>(
           begin: 1.5,
           end: 1.0,
           curve: const Interval(
@@ -222,7 +222,7 @@ class _AnimatedTextSplitState extends State<AnimatedTextSplit> {
             curve: Curves.linearToEaseOut,
           ),
         ),
-        AnimationType.color: CompositeTween<int>(
+        AnimationType.color: CompositeItem<int>(
           begin: 255,
           end: 170,
           curve: const Interval(
@@ -231,7 +231,7 @@ class _AnimatedTextSplitState extends State<AnimatedTextSplit> {
             curve: Curves.linear,
           ),
         ),
-        AnimationType.fadeOut: CompositeTween<double>(
+        AnimationType.fadeOut: CompositeItem<double>(
           begin: 1.0,
           end: 0.0,
           curve: Interval(
